@@ -1,2 +1,2 @@
 # python-ml-basics
-Machine Learning with Python. Basics.
+Machine Learning with Python. Simple example.
