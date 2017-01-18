@@ -4,19 +4,23 @@
 import csv, random
 import matplotlib.pyplot as plt
 
-# generate
 C1_X1 = []
 C1_X2 = []
 C2_X1 = []
 C2_X2 = []
+
+# generate
 with open('data.csv', 'wb') as f:
     w = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
     w.writerow(['X1', 'X2', 'Y'])
     for i in range(1000):
         x1 = random.random()
         x2 = random.random()
+
         y = int(x1 > x2)
+
         w.writerow([x1, x2, y])
+
         if y == 0:
             C1_X1.append(x1)
             C1_X2.append(x2)
