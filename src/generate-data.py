@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import csv, random
+import csv, random, math
 import matplotlib.pyplot as plt
 
 C1_X1 = []
@@ -13,13 +13,15 @@ C2_X2 = []
 with open('data.csv', 'wb') as f:
     w = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
     w.writerow(['X1', 'X2', 'Y'])
-    for i in range(1000):
+    for i in range(10000):
         x1 = random.random()
         x2 = random.random()
 
-        y = int(x1 > x2)
+        y = x1 > x2
+        #y = (x1-.5)**2 + (x2-.1)**2 > 0.25
+        #y = ((x1-.5)**2 + (x2-.5)**2 > 0.01) and ((x1-.25)**2 + (x2-.25)**2 > 0.005) and ((x1-.75)**2 + (x2-.25)**2 > 0.005) and ((x1-.5)**2 + (x2-.75)**2 > 0.03)
 
-        w.writerow([x1, x2, y])
+        w.writerow([x1, x2, int(y)])
 
         if y == 0:
             C1_X1.append(x1)
@@ -30,11 +32,10 @@ with open('data.csv', 'wb') as f:
 
 #display
 plt.figure(figsize=(10,8))
-plt.plot(C1_X1, C1_X2, lw=2, color='#5DA5DA', marker='o', ls='', label='Class 1')
-plt.plot(C2_X1, C2_X2, lw=2, color='#FAA43A', marker='o', ls='', label='Class 2')
+plt.plot(C1_X1, C1_X2, lw=2, color='#FAA43A', marker='o', ls='')
+plt.plot(C2_X1, C2_X2, lw=2, color='#5DA5DA', marker='o', ls='')
 plt.xlim([0.0, 1.0])
-plt.ylim([0.0, 1.05])
+plt.ylim([0.0, 1.0])
 plt.xlabel('X2')
 plt.ylabel('X1')
-plt.legend(loc="lower left", prop={'size': 8})
 plt.show()
